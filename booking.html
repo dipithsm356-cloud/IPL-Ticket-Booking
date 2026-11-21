@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPL Ticket Booking</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="booking-page">
+    <header class="booking-header">
+        <h1>IPL 2026 Ticket Booking</h1>
+        <nav aria-label="Primary navigation">
+            <a href="index.html#matches">Matches</a>
+            <a class="active" href="booking.html">Book Ticket</a>
+            <a href="index.html#mybookings">My Bookings</a>
+            <a href="index.html#guidelines">Guidelines</a>
+        </nav>
+    </header>
+
+    <main class="booking-layout">
+        <section class="booking-card" aria-labelledby="booking-heading">
+            <h2 id="booking-heading" class="sr-only">Ticket booking form</h2>
+
+            <form id="ticketForm">
+                <div class="filter-team">
+                    <label for="teamFilter">Filter Team:</label>
+                    <select id="teamFilter">
+                        <option value="">--Select Team--</option>
+                        <option>RCB</option>
+                        <option>CSK</option>
+                        <option>MI</option>
+                        <option>KKR</option>
+                        <option>SRH</option>
+                        <option>RR</option>
+                        <option>DC</option>
+                        <option>PBKS</option>
+                    </select>
+                </div>
+
+                <h3>Details:</h3>
+
+                <label for="name">Name:</label>
+                <input type="text" id="name" minlength="3" maxlength="40" placeholder="R" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" placeholder="example@gmail.com" required>
+
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" pattern="[0-9]{10}" maxlength="10" placeholder="8465189456" required>
+
+                <label for="match">Select Match:</label>
+                <select id="match" required>
+                    <option value="">-- Select a Match --</option>
+                    <option value="RCB vs CSK" data-venue="M. Chinnaswamy Stadium, Bengaluru" data-time="15-04-2026, 7:30 PM">RCB vs CSK</option>
+                    <option value="MI vs RR" data-venue="Wankhede Stadium, Mumbai" data-time="17-04-2026, 7:30 PM">MI vs RR</option>
+                    <option value="KKR vs SRH" data-venue="Eden Gardens, Kolkata" data-time="19-04-2026, 7:30 PM">KKR vs SRH</option>
+                    <option value="DC vs PBKS" data-venue="Arun Jaitley Stadium, Delhi" data-time="21-04-2026, 7:30 PM">DC vs PBKS</option>
+                </select>
+
+                <label for="stand">Stand Category:</label>
+                <select id="stand" required>
+                    <option value="" data-price="0">-- Select Stand --</option>
+                    <option value="General" data-price="800">General</option>
+                    <option value="Premium" data-price="2000">Premium</option>
+                    <option value="VIP" data-price="5000">VIP</option>
+                </select>
+
+                <label for="quantity">Ticket Quantity:</label>
+                <input type="number" id="quantity" min="1" max="5" value="1" required>
+
+                <button type="submit" class="book-button">Book Ticket</button>
+                <button type="reset" class="reset-button">Reset</button>
+            </form>
+        </section>
+
+        <aside class="summary-card" aria-label="Booking summary">
+            <h2>Booking Summary:</h2>
+            <dl>
+                <div><dt>Match:</dt><dd id="summaryMatch">--</dd></div>
+                <div><dt>Venue:</dt><dd id="summaryVenue">--</dd></div>
+                <div><dt>Date &amp; Time:</dt><dd id="summaryTime">--</dd></div>
+                <div><dt>Stand Category:</dt><dd id="summaryStand">--</dd></div>
+                <div><dt>Ticket Price:</dt><dd id="summaryPrice">--</dd></div>
+                <div><dt>Quantity:</dt><dd id="summaryQuantity">--</dd></div>
+                <div><dt>Total Amount:</dt><dd id="summaryTotal">--</dd></div>
+            </dl>
+        </aside>
+    </main>
+
+    <script>
+        const form = document.getElementById("ticketForm");
+        const match = document.getElementById("match");
+        const stand = document.getElementById("stand");
+        const quantity = document.getElementById("quantity");
+
+        function updateSummary() {
+            const matchOption = match.options[match.selectedIndex];
+            const standOption = stand.options[stand.selectedIndex];
+            const selectedMatch = match.value || "--";
+            const selectedStand = stand.value || "--";
+            const price = Number(standOption.dataset.price || 0);
+            const count = Number(quantity.value) || 0;
+
+            document.getElementById("summaryMatch").textContent = selectedMatch;
+            document.getElementById("summaryVenue").textContent = matchOption.dataset.venue || "--";
+            document.getElementById("summaryTime").textContent = matchOption.dataset.time || "--";
+            document.getElementById("summaryStand").textContent = selectedStand;
+            document.getElementById("summaryPrice").textContent = price ? "₹" + price : "--";
+            document.getElementById("summaryQuantity").textContent = quantity.value ? count : "--";
+            document.getElementById("summaryTotal").textContent = price && count ? "₹" + (price * count) : "--";
+        }
+
+        form.addEventListener("input", updateSummary);
+        form.addEventListener("change", updateSummary);
+        form.addEventListener("reset", () => setTimeout(updateSummary, 0));
+        form.addEventListener("submit", event => {
+            event.preventDefault();
+            if (form.reportValidity()) {
+                alert("Booking details confirmed!");
+            }
+        });
+        updateSummary();
+    </script>
+</body>
+</html>

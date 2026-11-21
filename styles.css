@@ -219,3 +219,225 @@ footer {
         font-size: 25px;
     }
 }
+
+/* IPL ticket booking page */
+.booking-page {
+    min-height: 100vh;
+    background: #ffffff;
+}
+
+.booking-header {
+    height: 76px;
+    margin: 0;
+    padding: 0 86px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(90deg, #111e47 0%, #2a2452 58%, #722c54 100%);
+    color: #ffffff;
+}
+
+.booking-header h1 {
+    margin: 0;
+    font-size: 19px;
+    line-height: 1;
+}
+
+.booking-header nav {
+    position: static;
+    width: auto;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.booking-header nav a {
+    margin: 0;
+    font-size: 14px;
+}
+
+.booking-header nav a.active {
+    color: #ffffff;
+}
+
+.booking-layout {
+    width: 1024px;
+    max-width: calc(100% - 40px);
+    margin: 0 auto;
+    padding: 30px 0 60px;
+    display: grid;
+    grid-template-columns: 520px 468px;
+    gap: 36px;
+    align-items: start;
+}
+
+.booking-card,
+.summary-card {
+    border: 1px solid #eeeeee;
+    border-radius: 4px;
+    background: #ffffff;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.04);
+}
+
+.booking-page .booking-card {
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+    color: var(--text);
+    text-align: left;
+}
+
+.booking-card form {
+    max-width: none;
+    margin: 0;
+    padding: 18px 25px 12px;
+    border-radius: 4px;
+    box-shadow: none;
+}
+
+.booking-card .filter-team {
+    margin-bottom: 20px;
+}
+
+.booking-card label,
+.booking-card .filter-team label {
+    display: block;
+    margin: 0 0 3px;
+    color: #6a2c91;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.booking-card h3 {
+    margin: 0 0 10px;
+    color: #6a2c91;
+    font-size: 13px;
+}
+
+.booking-card input,
+.booking-card select {
+    height: 35px;
+    margin: 0 0 12px;
+    padding: 6px 10px;
+    border: 1px solid #bfc4cb;
+    border-radius: 4px;
+    color: #333333;
+    background: #ffffff;
+    font-size: 14px;
+}
+
+.booking-card input:focus,
+.booking-card select:focus {
+    outline: none;
+    border-color: #7f4c96;
+}
+
+.booking-card .book-button,
+.booking-card .reset-button {
+    width: 100%;
+    height: 42px;
+    margin: 2px 0 0;
+    border-radius: 4px;
+    border: 0;
+    background: #ef4a00;
+    color: #ffffff;
+    font-size: 13px;
+}
+
+.booking-card .reset-button {
+    height: 34px;
+    background: transparent;
+    color: #171717;
+    font-weight: 700;
+}
+
+.summary-card {
+    margin-top: 0;
+    padding: 17px 14px 20px;
+    border-left: 4px solid #ef4a00;
+    min-height: 230px;
+}
+
+.summary-card h2 {
+    margin: 0 0 12px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ededed;
+    text-align: left;
+    color: #6a2c91;
+    font-size: 16px;
+}
+
+.summary-card dl {
+    margin: 0;
+}
+
+.summary-card dl div {
+    display: flex;
+    margin: 0 0 9px;
+    font-size: 13px;
+}
+
+.summary-card dt {
+    width: 102px;
+    color: #6a2c91;
+}
+
+.summary-card dd {
+    margin: 0;
+    color: #777777;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+@media (max-width: 900px) {
+    .booking-header {
+        height: auto;
+        min-height: 76px;
+        padding: 12px 20px;
+    }
+
+    .booking-layout {
+        grid-template-columns: 1fr;
+        max-width: calc(100% - 30px);
+    }
+
+    .summary-card {
+        margin-top: 0;
+    }
+}
+
+@media (max-width: 600px) {
+    .booking-header {
+        display: block;
+    }
+
+    .booking-header h1 {
+        padding: 8px 0 14px;
+    }
+
+    .booking-header nav {
+        justify-content: space-between;
+        gap: 8px;
+    }
+
+    .booking-header nav a {
+        font-size: 12px;
+    }
+
+    .booking-layout {
+        padding-top: 18px;
+    }
+}
