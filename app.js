@@ -130,3 +130,61 @@ matchSelect.addEventListener("change", updateBookingSummary);
 standSelect.addEventListener("change", updateBookingSummary);
 
 quantityInput.addEventListener("input", updateBookingSummary);
+
+// ACTIVITY 8 - HAMBURGER MENU
+
+const menuToggle = document.getElementById("menuToggle");
+const mainNav = document.getElementById("mainNav");
+
+menuToggle.addEventListener("click", function () {
+    mainNav.classList.toggle("active");
+});
+
+// Close menu after clicking a navigation link
+const navLinks = mainNav.querySelectorAll("a");
+
+navLinks.forEach(function (link) {
+    link.addEventListener("click", function () {
+        mainNav.classList.remove("active");
+    });
+});
+
+// ACTIVITY 8 - FILTER MATCHES BY TEAM
+
+const teamFilter = document.getElementById("teamFilter");
+const matchCards = document.querySelectorAll(".match-card");
+
+teamFilter.addEventListener("change", function () {
+
+    const selectedTeam = teamFilter.value;
+
+    matchCards.forEach(function (card) {
+
+        if (
+            selectedTeam === "" ||
+            card.dataset.team.includes(selectedTeam)
+        ) {
+            card.style.display = "";
+        } else {
+            card.style.display = "none";
+        }
+
+    });
+
+});
+
+// ACTIVITY 8 - GRID AND LIST VIEW
+
+const matchGrid = document.getElementById("matchGrid");
+const gridView = document.getElementById("gridView");
+const listView = document.getElementById("listView");
+
+// Grid View
+gridView.addEventListener("click", function () {
+    matchGrid.classList.remove("list-view");
+});
+
+// List View
+listView.addEventListener("click", function () {
+    matchGrid.classList.add("list-view");
+});
