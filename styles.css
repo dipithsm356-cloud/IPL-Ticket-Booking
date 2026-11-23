@@ -221,6 +221,10 @@ footer {
 }
 
 /* IPL ticket booking page */
+.booking-page [hidden] {
+    display: none !important;
+}
+
 .booking-page {
     min-height: 100vh;
     background: #ffffff;
@@ -440,4 +444,109 @@ footer {
     .booking-layout {
         padding-top: 18px;
     }
+}
+
+.booking-confirmation {
+    width: 560px;
+    max-width: calc(100% - 30px);
+    margin: 45px auto;
+    padding: 35px 40px;
+    border: 1px solid #eeeeee;
+    border-top: 4px solid #ef4a00;
+    border-radius: 6px;
+    background: #ffffff;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+.confirmation-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 14px;
+    border-radius: 50%;
+    background: #168a52;
+    color: #ffffff;
+    font-size: 38px;
+    line-height: 64px;
+}
+
+.booking-confirmation h2 {
+    margin: 0 0 8px;
+    color: #6a2c91;
+}
+
+.booking-confirmation > p {
+    color: #666666;
+}
+
+.booking-confirmation dl {
+    margin: 24px 0;
+    border-top: 1px solid #eeeeee;
+    text-align: left;
+}
+
+.booking-confirmation dl div {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 8px 0;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.booking-confirmation dt {
+    color: #6a2c91;
+    font-weight: 700;
+}
+
+.booking-confirmation dd {
+    margin: 0;
+    text-align: right;
+}
+
+.confirmation-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.confirmation-button,
+.confirmation-secondary {
+    min-width: 150px;
+    padding: 11px 16px;
+    border-radius: 4px;
+    background: #ef4a00;
+    color: #ffffff !important;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.confirmation-secondary {
+    border: 1px solid #6a2c91;
+    background: #ffffff;
+    color: #6a2c91 !important;
+}
+
+
+/* ===================================
+   ACTIVITY 5 - TOAST NOTIFICATION
+=================================== */
+
+#toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: #222;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    font-size: 16px;
+    z-index: 9999;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+#toast.show {
+    visibility: visible;
+    opacity: 1;
 }

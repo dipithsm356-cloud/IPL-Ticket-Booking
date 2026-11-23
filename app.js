@@ -57,3 +57,76 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
+
+// ===================================
+// ACTIVITY 7 - TICKET PRICE DETAILS
+// ===================================
+
+const ticketPrices = {
+    "RCB vs CSK": {
+        general: 800,
+        premium: 2000,
+        vip: 5000
+    },
+
+    "MI vs KKR": {
+        general: 1000,
+        premium: 2500,
+        vip: 6000
+    },
+
+    "SRH vs RCB": {
+        general: 700,
+        premium: 1800,
+        vip: 4500
+    }
+};
+
+// Select booking form elements
+const matchSelect = document.getElementById("match");
+const standSelect = document.getElementById("stand");
+const quantityInput = document.getElementById("quantity");
+
+// Select booking summary elements
+const summaryMatch = document.getElementById("summaryMatch");
+const summaryStand = document.getElementById("summaryStand");
+const summaryPrice = document.getElementById("summaryPrice");
+const summaryQuantity = document.getElementById("summaryQuantity");
+const summaryTotal = document.getElementById("summaryTotal");
+
+// Function to update Booking Summary
+
+function updateBookingSummary() {
+
+    const selectedMatch = matchSelect.value;
+    const selectedStand = standSelect.value;
+    const quantity = Number(quantityInput.value);
+
+    if (!selectedMatch || !selectedStand || quantity < 1 || quantity > 10) {
+        summaryMatch.textContent = selectedMatch || "Not Selected";
+        summaryStand.textContent = selectedStand || "Not Selected";
+        summaryPrice.textContent = "₹0";
+        summaryQuantity.textContent = quantity || "0";
+        summaryTotal.textContent = "₹0";
+        return;
+    }
+
+    const price = ticketPrices[selectedMatch][selectedStand];
+    const total = price * quantity;
+
+    summaryMatch.textContent = selectedMatch;
+    summaryStand.textContent = selectedStand;
+    summaryPrice.textContent = "₹" + price;
+    summaryQuantity.textContent = quantity;
+    summaryTotal.textContent = "₹" + total;
+
+    showToast("Booking summary updated!");
+}
+
+// Listen for changes in booking form
+
+matchSelect.addEventListener("change", updateBookingSummary);
+
+standSelect.addEventListener("change", updateBookingSummary);
+
+quantityInput.addEventListener("input", updateBookingSummary);

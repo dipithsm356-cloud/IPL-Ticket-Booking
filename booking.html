@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IPL Ticket Booking</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
 </head>
 <body class="booking-page">
     <header class="booking-header">
@@ -87,11 +88,25 @@
         </aside>
     </main>
 
+    <section id="confirmation" class="booking-confirmation" hidden>
+        <div class="confirmation-icon" aria-hidden="true">✓</div>
+        <h2>Booking Confirmed!</h2>
+        <p>Your IPL tickets have been booked successfully.</p>
+        <dl id="confirmationDetails"></dl>
+        <div class="confirmation-actions">
+            <a href="booking.html" class="confirmation-button">Book Another</a>
+            <a href="index.html#mybookings" class="confirmation-secondary">My Bookings</a>
+        </div>
+    </section>
+
     <script>
         const form = document.getElementById("ticketForm");
         const match = document.getElementById("match");
         const stand = document.getElementById("stand");
         const quantity = document.getElementById("quantity");
+        const layout = document.querySelector(".booking-layout");
+        const confirmation = document.getElementById("confirmation");
+        const confirmationDetails = document.getElementById("confirmationDetails");
 
         function updateSummary() {
             const matchOption = match.options[match.selectedIndex];
@@ -116,7 +131,25 @@
         form.addEventListener("submit", event => {
             event.preventDefault();
             if (form.reportValidity()) {
-                alert("Booking details confirmed!");
+                const matchOption = match.options[match.selectedIndex];
+                const standOption = stand.options[stand.selectedIndex];
+                const price = Number(standOption.dataset.price || 0);
+                const count = Number(quantity.value) || 0;
+                const bookingId = "IPL" + Date.now().toString().slice(-6);
+
+                confirmationDetails.innerHTML =
+                    '<div><dt>Booking ID</dt><dd>' + bookingId + '</dd></div>' +
+                    '<div><dt>Name</dt><dd>' + document.getElementById("name").value + '</dd></div>' +
+                    '<div><dt>Match</dt><dd>' + match.value + '</dd></div>' +
+                    '<div><dt>Venue</dt><dd>' + (matchOption.dataset.venue || "--") + '</dd></div>' +
+                    '<div><dt>Date &amp; Time</dt><dd>' + (matchOption.dataset.time || "--") + '</dd></div>' +
+                    '<div><dt>Stand</dt><dd>' + stand.value + '</dd></div>' +
+                    '<div><dt>Tickets</dt><dd>' + count + '</dd></div>' +
+                    '<div><dt>Total Amount</dt><dd>₹' + (price * count) + '</dd></div>';
+
+                layout.hidden = true;
+                confirmation.hidden = false;
+                window.scrollTo({ top: 0, behavior: "smooth" });
             }
         });
         updateSummary();
